@@ -46,10 +46,26 @@
 		88E264CF2483E2BF00FAF9ED /* YMCirclePickerView */ = {
 			isa = PBXGroup;
 			children = (
+				88E264D82483E37500FAF9ED /* Layout */,
+				88E264D92483E37B00FAF9ED /* Views */,
 				88E264D02483E2BF00FAF9ED /* YMCirclePickerView.h */,
 				88E264D12483E2BF00FAF9ED /* Info.plist */,
 			);
 			path = YMCirclePickerView;
+			sourceTree = "<group>";
+		};
+		88E264D82483E37500FAF9ED /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		88E264D92483E37B00FAF9ED /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
