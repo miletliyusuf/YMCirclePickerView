@@ -12,9 +12,30 @@
         <view contentMode="scaleToFill" id="Bnb-Sk-uo1" customClass="YMCirclePickerView" customModule="YMCirclePickerView" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="400" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-2g-ghf">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="215"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="77T-Rd-yoB">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iIt-2g-ghf" secondAttribute="trailing" id="IDp-iQ-Tt5"/>
+                <constraint firstItem="iIt-2g-ghf" firstAttribute="top" secondItem="Bnb-Sk-uo1" secondAttribute="top" id="RHe-XR-aRS"/>
+                <constraint firstAttribute="bottom" secondItem="iIt-2g-ghf" secondAttribute="bottom" id="fdR-O4-TRX"/>
+                <constraint firstItem="iIt-2g-ghf" firstAttribute="leading" secondItem="Bnb-Sk-uo1" secondAttribute="leading" id="vEo-hH-jj3"/>
+            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="iIt-2g-ghf" id="hLY-3K-gkX"/>
+            </connections>
             <point key="canvasLocation" x="-17.39130434782609" y="-249.44196428571428"/>
         </view>
     </objects>

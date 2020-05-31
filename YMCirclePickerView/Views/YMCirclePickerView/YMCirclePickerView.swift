@@ -30,9 +30,11 @@ public extension YMCirclePickerViewDelegate {
 
 // MARK: - YMCirclePickerView
 
-public class YMCirclePickerView: UIView {
+public class YMCirclePickerView: UIView, NibLoadable {
 
     // MARK: - Outlets
+
+    @IBOutlet private weak var collectionView: UICollectionView!
 
     // MARK: - Properties
 
@@ -46,7 +48,54 @@ public class YMCirclePickerView: UIView {
 
     // MARK: - Lifecycle
 
+    public override func awakeFromNib() {
+
+        super.awakeFromNib()
+        configureCollectionView()
+    }
+
+    private func configureCollectionView() {
+
+        collectionView.register(
+            YMCirclePickerCollectionViewCell.nib,
+            forCellWithReuseIdentifier: YMCirclePickerCollectionViewCell.reuseIdentifier
+        )
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+
     private func updateUI() {
+
+        // TODO
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension YMCirclePickerView: UICollectionViewDataSource {
+
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        return 0 //TODO
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: YMCirclePickerCollectionViewCell.reuseIdentifier,
+            for: indexPath
+            ) as? YMCirclePickerCollectionViewCell else { return UICollectionViewCell() }
+
+        // TODO
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension YMCirclePickerView: UICollectionViewDelegate {
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         // TODO
     }

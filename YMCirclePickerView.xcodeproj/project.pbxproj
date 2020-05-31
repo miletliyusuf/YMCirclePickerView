@@ -11,6 +11,9 @@
 		88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DA2483E3EB00FAF9ED /* YMCirclePickerViewLayout.swift */; };
 		88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */; };
 		88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */; };
+		88E264E32483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */; };
+		88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */; };
+		88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E92483F6C800FAF9ED /* NibLoadable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		88E264DA2483E3EB00FAF9ED /* YMCirclePickerViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerViewLayout.swift; sourceTree = "<group>"; };
 		88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YMCirclePickerView.xib; sourceTree = "<group>"; };
 		88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerView.swift; sourceTree = "<group>"; };
+		88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YMCirclePickerCollectionViewCell.xib; sourceTree = "<group>"; };
+		88E264E92483F6C800FAF9ED /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 		88E264CF2483E2BF00FAF9ED /* YMCirclePickerView */ = {
 			isa = PBXGroup;
 			children = (
+				88E264E62483F5E100FAF9ED /* Utils */,
 				88E264D82483E37500FAF9ED /* Layout */,
 				88E264D92483E37B00FAF9ED /* Views */,
 				88E264D02483E2BF00FAF9ED /* YMCirclePickerView.h */,
@@ -79,10 +86,28 @@
 		88E264DC2483F17D00FAF9ED /* YMCirclePickerView */ = {
 			isa = PBXGroup;
 			children = (
+				88E264E12483F43100FAF9ED /* Cells */,
 				88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */,
 				88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */,
 			);
 			path = YMCirclePickerView;
+			sourceTree = "<group>";
+		};
+		88E264E12483F43100FAF9ED /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */,
+				88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		88E264E62483F5E100FAF9ED /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				88E264E92483F6C800FAF9ED /* NibLoadable.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */,
+				88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E264E32483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift in Sources */,
 				88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */,
+				88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */,
 				88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
