@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		88E264D22483E2BF00FAF9ED /* YMCirclePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E264D02483E2BF00FAF9ED /* YMCirclePickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DA2483E3EB00FAF9ED /* YMCirclePickerViewLayout.swift */; };
+		88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */; };
+		88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		88E264D02483E2BF00FAF9ED /* YMCirclePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMCirclePickerView.h; sourceTree = "<group>"; };
 		88E264D12483E2BF00FAF9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88E264DA2483E3EB00FAF9ED /* YMCirclePickerViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerViewLayout.swift; sourceTree = "<group>"; };
+		88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YMCirclePickerView.xib; sourceTree = "<group>"; };
+		88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +71,18 @@
 		88E264D92483E37B00FAF9ED /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88E264DC2483F17D00FAF9ED /* YMCirclePickerView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		88E264DC2483F17D00FAF9ED /* YMCirclePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */,
+				88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */,
+			);
+			path = YMCirclePickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */,
 				88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
