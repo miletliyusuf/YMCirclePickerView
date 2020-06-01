@@ -10,11 +10,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Bnb-Sk-uo1" customClass="YMCirclePickerView" customModule="YMCirclePickerView" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="215"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="76"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-2g-ghf">
-                    <rect key="frame" x="0.0" y="0.0" width="400" height="215"/>
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="76"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="77T-Rd-yoB">
                         <size key="itemSize" width="128" height="128"/>
@@ -23,20 +23,44 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-cS-Eks">
+                    <rect key="frame" x="0.0" y="76" width="400" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThR-J3-PSU">
+                    <rect key="frame" x="177.5" y="15.5" width="45" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="45" id="dF5-Ax-2sA"/>
+                        <constraint firstAttribute="height" constant="45" id="moq-3f-cl3"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Hxa-cS-Eks" secondAttribute="bottom" id="4QQ-K5-axA"/>
+                <constraint firstAttribute="trailing" secondItem="Hxa-cS-Eks" secondAttribute="trailing" id="DRw-rs-0RK"/>
                 <constraint firstAttribute="trailing" secondItem="iIt-2g-ghf" secondAttribute="trailing" id="IDp-iQ-Tt5"/>
+                <constraint firstItem="Hxa-cS-Eks" firstAttribute="top" secondItem="iIt-2g-ghf" secondAttribute="bottom" id="LVH-H1-db5"/>
+                <constraint firstItem="ThR-J3-PSU" firstAttribute="centerY" secondItem="iIt-2g-ghf" secondAttribute="centerY" id="Lss-bC-Il1"/>
                 <constraint firstItem="iIt-2g-ghf" firstAttribute="top" secondItem="Bnb-Sk-uo1" secondAttribute="top" id="RHe-XR-aRS"/>
-                <constraint firstAttribute="bottom" secondItem="iIt-2g-ghf" secondAttribute="bottom" id="fdR-O4-TRX"/>
+                <constraint firstItem="ThR-J3-PSU" firstAttribute="centerX" secondItem="iIt-2g-ghf" secondAttribute="centerX" id="U74-LO-NZ6"/>
+                <constraint firstItem="Hxa-cS-Eks" firstAttribute="leading" secondItem="Bnb-Sk-uo1" secondAttribute="leading" id="Zzq-1w-fcP"/>
                 <constraint firstItem="iIt-2g-ghf" firstAttribute="leading" secondItem="Bnb-Sk-uo1" secondAttribute="leading" id="vEo-hH-jj3"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="collectionTitleVerticalConstraint" destination="LVH-H1-db5" id="m7P-J1-zdK"/>
                 <outlet property="collectionView" destination="iIt-2g-ghf" id="hLY-3K-gkX"/>
+                <outlet property="selectionView" destination="ThR-J3-PSU" id="0B3-G2-cqh"/>
+                <outlet property="selectionViewHeightContstraint" destination="moq-3f-cl3" id="gLb-OE-Id5"/>
+                <outlet property="selectionViewWidthContstraint" destination="dF5-Ax-2sA" id="cm3-gw-cm4"/>
+                <outlet property="titleLabel" destination="Hxa-cS-Eks" id="2dj-Rf-Bat"/>
             </connections>
-            <point key="canvasLocation" x="-17.39130434782609" y="-249.44196428571428"/>
+            <point key="canvasLocation" x="-17.39130434782609" y="-296.98660714285711"/>
         </view>
     </objects>
 </document>
