@@ -13,7 +13,7 @@ import UIKit
 
 public struct YMCirclePickerViewPresentation {
 
-    public var presentation: YMCirclePickerViewLayoutPresentation
+    public var layoutPresentation: YMCirclePickerViewLayoutPresentation
 }
 
 // MARK: - YMCirclePickerViewDelegate
@@ -62,11 +62,17 @@ public class YMCirclePickerView: UIView, NibLoadable {
         )
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
     }
 
     private func updateUI() {
 
-        // TODO
+        guard let presentation = self.presentation else { return }
+
+        collectionView.collectionViewLayout = YMCirclePickerViewLayout(
+            presentation: presentation.layoutPresentation
+        )
     }
 }
 
