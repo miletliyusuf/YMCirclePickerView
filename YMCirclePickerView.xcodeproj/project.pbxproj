@@ -14,6 +14,7 @@
 		88E264E32483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */; };
 		88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */; };
 		88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E92483F6C800FAF9ED /* NibLoadable.swift */; };
+		88FC41E72484DC4300E5CE50 /* YMCirclePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FC41E62484DC4300E5CE50 /* YMCirclePickerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YMCirclePickerCollectionViewCell.xib; sourceTree = "<group>"; };
 		88E264E92483F6C800FAF9ED /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		88FC41E62484DC4300E5CE50 /* YMCirclePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YMCirclePickerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		88E264CF2483E2BF00FAF9ED /* YMCirclePickerView */ = {
 			isa = PBXGroup;
 			children = (
+				88FC41E52484DC2A00E5CE50 /* Model */,
 				88E264E62483F5E100FAF9ED /* Utils */,
 				88E264D82483E37500FAF9ED /* Layout */,
 				88E264D92483E37B00FAF9ED /* Views */,
@@ -108,6 +111,14 @@
 				88E264E92483F6C800FAF9ED /* NibLoadable.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		88FC41E52484DC2A00E5CE50 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88FC41E62484DC4300E5CE50 /* YMCirclePickerModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 				88E264E32483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift in Sources */,
 				88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */,
 				88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */,
+				88FC41E72484DC4300E5CE50 /* YMCirclePickerModel.swift in Sources */,
 				88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

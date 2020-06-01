@@ -28,6 +28,13 @@ public extension YMCirclePickerViewDelegate {
     func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, didSelectItemAt index: Int) {}
 }
 
+// MARK: - YMCirclePickerViewDataSource
+
+public protocol YMCirclePickerViewDataSource: AnyObject {
+
+    func ymCirclePickerView<T: YMCirclePickerModel>(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> T
+}
+
 // MARK: - YMCirclePickerView
 
 public class YMCirclePickerView: UIView, NibLoadable {
@@ -35,10 +42,12 @@ public class YMCirclePickerView: UIView, NibLoadable {
     // MARK: - Outlets
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Properties
 
     weak var delegate: YMCirclePickerViewDelegate? = nil
+    weak var dataSource: YMCirclePickerViewDataSource? = nil
 
     var presentation: YMCirclePickerViewPresentation? {
         didSet {
@@ -90,9 +99,22 @@ extension YMCirclePickerView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: YMCirclePickerCollectionViewCell.reuseIdentifier,
             for: indexPath
-            ) as? YMCirclePickerCollectionViewCell else { return UICollectionViewCell() }
+            ) as? YMCirclePickerCollectionViewCell,
+            let model = dataSource?.ymCirclePickerView(
+                ymCirclePickerView: self,
+                itemForIndex: indexPath.row
+            ) else { return UICollectionViewCell() }
 
-        // TODO
+        if let image = model.image {
+            cell.presentation = YMCirclePickerCollectionViewCellPresentation(image: image)
+        }
+
+        if let title = model.title {
+            titleLabel.text = title
+        } else if let attributedTitle = model.attributedTitle {
+            titleLabel.attributedText = attributedTitle
+        }
+
         return cell
     }
 }
