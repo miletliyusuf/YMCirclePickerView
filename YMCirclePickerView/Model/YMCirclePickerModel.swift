@@ -10,10 +10,15 @@ import Foundation
 import UIKit
 
 /// Collection model conforming protocol
-public class YMCirclePickerModel {
+open class YMCirclePickerModel: NSObject {
 
-    var title: String?
-    var attributedTitle: NSAttributedString?
-    var image: UIImage?
-    var imageURL: URL?
+    public var title: String?
+    public var attributedTitle: NSAttributedString?
+    public var image: UIImage?
+    public var imageURL: URL?
+
+    public override init() {
+
+        super.init()
+    }
 }

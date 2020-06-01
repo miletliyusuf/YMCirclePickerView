@@ -26,7 +26,7 @@ public struct YMCirclePickerViewPresentation {
     public var layoutPresentation: YMCirclePickerViewLayoutPresentation
     public var stylePresentation: YMCirclePickerViewStylePresentation
 
-    static var `default` = YMCirclePickerViewPresentation(
+    public static var `default` = YMCirclePickerViewPresentation(
         layoutPresentation: YMCirclePickerViewLayoutPresentation(
             itemSize: CGSize(width: 42.0, height: 42.0),
             unselectedItemSize: CGSize(width: 20.0, height: 20.0),
@@ -62,10 +62,11 @@ public protocol YMCirclePickerViewDataSource: AnyObject {
 
 // MARK: - YMCirclePickerView
 
-public class YMCirclePickerView: UIView, NibLoadable {
+public class YMCirclePickerView: UIView {
 
     // MARK: - Outlets
 
+    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var selectionView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -78,21 +79,47 @@ public class YMCirclePickerView: UIView, NibLoadable {
 
     // MARK: - Properties
 
-    weak var delegate: YMCirclePickerViewDelegate? = nil
-    weak var dataSource: YMCirclePickerViewDataSource? = nil
+    public weak var delegate: YMCirclePickerViewDelegate? = nil
+    public weak var dataSource: YMCirclePickerViewDataSource? = nil
 
-    var presentation: YMCirclePickerViewPresentation? {
+    public var presentation: YMCirclePickerViewPresentation? {
         didSet {
             updateUI()
         }
     }
 
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    func commonInit() {
+
+        guard let contentView = self.fromNib() else { fatalError("View could not load from nib") }
+
+        addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = self.layoutMarginsGuide
+        contentView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0).isActive = true
+        contentView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0).isActive = true
+
+        configureCollectionView()
+    }
+
     // MARK: - Lifecycle
 
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
 
         super.awakeFromNib()
-        configureCollectionView()
+        commonInit()
     }
 
     private func configureCollectionView() {
@@ -140,6 +167,16 @@ public class YMCirclePickerView: UIView, NibLoadable {
         selectionView.layer.addSublayer(shapeLayer)
     }
 }
+
+// MARK: - Bundle extension
+
+extension YMCirclePickerView {
+
+    public static var bundle: Bundle {
+        return Bundle(for: self)
+    }
+}
+
 
 // MARK: - UICollectionViewDataSource
 
