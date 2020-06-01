@@ -33,6 +33,7 @@ public extension YMCirclePickerViewDelegate {
 public protocol YMCirclePickerViewDataSource: AnyObject {
 
     func ymCirclePickerView<T: YMCirclePickerModel>(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> T
+    func ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: YMCirclePickerView) -> Int
 }
 
 // MARK: - YMCirclePickerView
@@ -91,7 +92,7 @@ extension YMCirclePickerView: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return 0 //TODO
+        return dataSource?.ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: self) ?? 0
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
