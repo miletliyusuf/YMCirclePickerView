@@ -92,6 +92,8 @@ public class YMCirclePickerView: UIView, NibLoadable {
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.decelerationRate = .fast
     }
 
     private func updateUI() {
@@ -166,6 +168,14 @@ extension YMCirclePickerView: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        // TODO
+        let selectedItem = indexPath.item
+
+        guard let layout: YMCirclePickerViewLayout = collectionView.collectionViewLayout as? YMCirclePickerViewLayout else { return }
+        let x: CGFloat = CGFloat(selectedItem) * ((presentation?.layoutPresentation.itemSize.width ?? 0) + layout.minimumInteritemSpacing)
+        layout.ignoringBoundsChange = true
+        collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
+        layout.ignoringBoundsChange = false
+
+        delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
     }
 }

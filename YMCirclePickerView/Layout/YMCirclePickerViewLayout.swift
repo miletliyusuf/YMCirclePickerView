@@ -25,9 +25,12 @@ public struct YMCirclePickerViewLayoutPresentation {
 
 // MARK: - YMCirclePickerViewLayout
 
-public final class YMCirclePickerViewLayout: UICollectionViewLayout {
+public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
 
     private var presentation: YMCirclePickerViewLayoutPresentation?
+
+    /// Used to ignore bounds change when auto scrolling to certain cell
+    var ignoringBoundsChange: Bool = false
 
     /// Layout init.
     /// - Parameter presentation: `YMCirclePickerViewLayoutPresentation`
@@ -130,7 +133,7 @@ public final class YMCirclePickerViewLayout: UICollectionViewLayout {
     public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 
         if newBounds.size != collectionView?.bounds.size { cachedItemsAttributes.removeAll() }
-        return true
+        return !ignoringBoundsChange
     }
 
     public override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
