@@ -25,6 +25,19 @@ public struct YMCirclePickerViewPresentation {
 
     public var layoutPresentation: YMCirclePickerViewLayoutPresentation
     public var stylePresentation: YMCirclePickerViewStylePresentation
+
+    static var `default` = YMCirclePickerViewPresentation(
+        layoutPresentation: YMCirclePickerViewLayoutPresentation(
+            itemSize: CGSize(width: 42.0, height: 42.0),
+            unselectedItemSize: CGSize(width: 20.0, height: 20.0),
+            spacing: 20.0
+        ),
+        stylePresentation: YMCirclePickerViewStylePresentation(
+            selectionColor: .white,
+            selectionLineWidth: 1.0,
+            titleLabelDistance: 10.0
+        )
+    )
 }
 
 // MARK: - YMCirclePickerViewDelegate
