@@ -62,7 +62,11 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
     private var selectedIndex = 0 {
         didSet {
             guard let collectionView = collectionView else { return }
-            let indexPath = IndexPath(item: selectedIndex, section: 0)
+            let count = cachedItemsAttributes.count - 1
+            var safeIndex = selectedIndex
+            if selectedIndex > count { safeIndex = count }
+            if selectedIndex < 0 { safeIndex = 0 }
+            let indexPath = IndexPath(item: safeIndex, section: 0)
             collectionView.delegate?.collectionView?(
                 collectionView,
                 didSelectItemAt: indexPath

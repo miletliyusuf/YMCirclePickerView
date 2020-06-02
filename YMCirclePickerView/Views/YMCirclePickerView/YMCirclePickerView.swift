@@ -117,12 +117,6 @@ public class YMCirclePickerView: UIView {
 
     // MARK: - Lifecycle
 
-    open override func awakeFromNib() {
-
-        super.awakeFromNib()
-        commonInit()
-    }
-
     private func configureCollectionView() {
 
         collectionView.register(
@@ -198,12 +192,6 @@ extension YMCirclePickerView: UICollectionViewDataSource {
             cell.presentation = YMCirclePickerCollectionViewCellPresentation(image: image)
         }
 
-        if let title = model.title {
-            titleLabel.text = title
-        } else if let attributedTitle = model.attributedTitle {
-            titleLabel.attributedText = attributedTitle
-        }
-
         return cell
     }
 }
@@ -213,6 +201,16 @@ extension YMCirclePickerView: UICollectionViewDataSource {
 extension YMCirclePickerView: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        let model = dataSource?.ymCirclePickerView(
+            ymCirclePickerView: self,
+            itemForIndex: indexPath.row
+        )
+        if let title = model?.title {
+            titleLabel.text = title
+        } else if let attributedTitle = model?.attributedTitle {
+            titleLabel.attributedText = attributedTitle
+        }
 
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
     }
