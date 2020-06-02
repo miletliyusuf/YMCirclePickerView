@@ -29,9 +29,6 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
 
     private var presentation: YMCirclePickerViewLayoutPresentation?
 
-    /// Used to ignore bounds change when auto scrolling to certain cell
-    var ignoringBoundsChange: Bool = false
-
     /// Layout init.
     /// - Parameter presentation: `YMCirclePickerViewLayoutPresentation`
     public convenience init(presentation: YMCirclePickerViewLayoutPresentation) {
@@ -43,9 +40,6 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
     override init() {
 
         super.init()
-        guard self.presentation != nil else {
-            fatalError("Must init with `YMCirclePickerViewLayoutPresentation`")
-        }
     }
 
     required init?(coder: NSCoder) {
@@ -57,10 +51,9 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
 
     public override var collectionViewContentSize: CGSize {
 
-        guard let presentation = self.presentation else { return .zero }
         let leftmostEdge = cachedItemsAttributes.values.map { $0.frame.minX }.min() ?? 0
         let rightmostEdge = cachedItemsAttributes.values.map { $0.frame.maxX }.max() ?? 0
-        return CGSize(width: rightmostEdge - leftmostEdge, height: presentation.itemSize.height)
+        return CGSize(width: rightmostEdge - leftmostEdge, height: collectionView?.frame.size.height ?? 0.0)
     }
 
     // MARK: - Private Properties
@@ -91,18 +84,28 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
 
     // MARK: - Public Methods
 
+    // Called whenever layout is invalidated.
     override public func prepare() {
 
         super.prepare()
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = self.collectionView,
+            cachedItemsAttributes.isEmpty else { return }
         updateInsets()
-        guard cachedItemsAttributes.isEmpty else { return }
         collectionView.decelerationRate = .fast
         let itemsCount = collectionView.numberOfItems(inSection: 0)
         for item in 0..<itemsCount {
             let indexPath = IndexPath(item: item, section: 0)
             cachedItemsAttributes[indexPath] = createAttributesForItem(at: indexPath)
         }
+    }
+
+    private func updateInsets() {
+
+        guard let collectionView = collectionView,
+            let presentation = self.presentation else { return }
+        let horizontalInset = (collectionView.bounds.size.width - presentation.itemSize.width) / 2
+        collectionView.contentInset.left = horizontalInset
+        collectionView.contentInset.right = horizontalInset
     }
 
     public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -133,7 +136,7 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
     public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 
         if newBounds.size != collectionView?.bounds.size { cachedItemsAttributes.removeAll() }
-        return !ignoringBoundsChange
+        return true
     }
 
     public override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
@@ -189,13 +192,5 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
         return layoutAttributesForElements(in: searchRect)?.min(
             by: { abs($0.center.x - xPosition) < abs($1.center.x - xPosition) }
         )
-    }
-
-    private func updateInsets() {
-
-        guard let collectionView = collectionView,
-            let presentation = self.presentation else { return }
-        collectionView.contentInset.left = (collectionView.bounds.size.width - presentation.itemSize.width) / 2
-        collectionView.contentInset.right = (collectionView.bounds.size.width - presentation.itemSize.width) / 2
     }
 }

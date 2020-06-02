@@ -28,9 +28,9 @@ public struct YMCirclePickerViewPresentation {
 
     public static var `default` = YMCirclePickerViewPresentation(
         layoutPresentation: YMCirclePickerViewLayoutPresentation(
-            itemSize: CGSize(width: 42.0, height: 42.0),
+            itemSize: CGSize(width: 60.0, height: 60.0),
             unselectedItemSize: CGSize(width: 20.0, height: 20.0),
-            spacing: 20.0
+            spacing: 10.0
         ),
         stylePresentation: YMCirclePickerViewStylePresentation(
             selectionColor: .white,
@@ -67,6 +67,7 @@ public class YMCirclePickerView: UIView {
     // MARK: - Outlets
 
     @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var selectionView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -140,31 +141,26 @@ public class YMCirclePickerView: UIView {
 
         guard let presentation = self.presentation else { return }
 
+        collectionViewHeightConstraint.constant = presentation.layoutPresentation.itemSize.height
         collectionView.collectionViewLayout = YMCirclePickerViewLayout(
             presentation: presentation.layoutPresentation
         )
+        collectionView.collectionViewLayout.invalidateLayout()
 
         // Selection view
 
         selectionViewHeightContstraint.constant = presentation.layoutPresentation.itemSize.height + presentation.stylePresentation.selectionLineWidth
         selectionViewWidthContstraint.constant = presentation.layoutPresentation.itemSize.width + presentation.stylePresentation.selectionLineWidth
 
+        // Distance between collection and title
+
+        collectionTitleVerticalConstraint.constant = presentation.stylePresentation.titleLabelDistance
+
         layoutIfNeeded()
 
-        let circlePath = UIBezierPath(
-            arcCenter: selectionView.center,
-            radius: selectionView.frame.size.width / 2.0,
-            startAngle: CGFloat(0),
-            endAngle: CGFloat(Double.pi * 2),
-            clockwise: true
-        )
-
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = presentation.stylePresentation.selectionColor.cgColor
-        shapeLayer.lineWidth = presentation.stylePresentation.selectionLineWidth
-        selectionView.layer.addSublayer(shapeLayer)
+        selectionView.layer.cornerRadius = (selectionView.frame.size.width / 2.0)
+        selectionView.layer.borderWidth = presentation.stylePresentation.selectionLineWidth
+        selectionView.layer.borderColor = presentation.stylePresentation.selectionColor.cgColor
     }
 }
 
@@ -217,14 +213,6 @@ extension YMCirclePickerView: UICollectionViewDataSource {
 extension YMCirclePickerView: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let selectedItem = indexPath.item
-
-        guard let layout: YMCirclePickerViewLayout = collectionView.collectionViewLayout as? YMCirclePickerViewLayout else { return }
-        let x: CGFloat = CGFloat(selectedItem) * ((presentation?.layoutPresentation.itemSize.width ?? 0) + layout.minimumInteritemSpacing)
-        layout.ignoringBoundsChange = true
-        collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
-        layout.ignoringBoundsChange = false
 
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
     }
