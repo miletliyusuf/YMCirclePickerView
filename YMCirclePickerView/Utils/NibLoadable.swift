@@ -11,12 +11,12 @@ import UIKit
 
 // MARK: - NibLoadable
 
-public protocol NibLoadable: class {
+protocol NibLoadable: class {
 
     static var nib: UINib { get }
 }
 
-public extension NibLoadable {
+extension NibLoadable {
 
     static var nib: UINib {
 
@@ -26,7 +26,7 @@ public extension NibLoadable {
 
 // MARK: NibLoadble's UIView extension
 
-public extension NibLoadable where Self: UIView {
+extension NibLoadable where Self: UIView {
 
     /// Returns UIView object instantiated from nib.
     static func instanceFromNib() -> Self {

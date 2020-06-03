@@ -89,6 +89,11 @@ public protocol YMCirclePickerViewDataSource: AnyObject {
 
 public class YMCirclePickerView: UIView {
 
+    private enum Constants {
+
+        static let initialFrame = CGRect(origin: .zero, size: UIScreen.main.bounds.size)
+    }
+
     // MARK: - Outlets
 
     @IBOutlet private weak var contentView: UIView!
@@ -115,7 +120,7 @@ public class YMCirclePickerView: UIView {
     }
 
     public override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: frame == .zero ? Constants.initialFrame : frame)
         commonInit()
     }
 
@@ -207,16 +212,6 @@ public class YMCirclePickerView: UIView {
         collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
 }
-
-// MARK: - Bundle extension
-
-extension YMCirclePickerView {
-
-    public static var bundle: Bundle {
-        return Bundle(for: self)
-    }
-}
-
 
 // MARK: - UICollectionViewDataSource
 
