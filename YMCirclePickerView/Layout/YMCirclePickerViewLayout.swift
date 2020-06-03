@@ -62,34 +62,24 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
     // MARK: - Private Properties
     private var cachedItemsAttributes: [IndexPath: UICollectionViewLayoutAttributes] = [:]
 
-    public var selectedIndex = 0 {
-        didSet {
-            guard let collectionView = collectionView,
-                !cachedItemsAttributes.isEmpty
-            else { return }
-            let count = cachedItemsAttributes.count - 1
-            var safeIndex = selectedIndex
-            if selectedIndex > count { safeIndex = count }
-            if selectedIndex < 0 { safeIndex = 0 }
-            let indexPath = IndexPath(item: safeIndex, section: 0)
-            // TODO: Disable when selected
-//            collectionView.delegate?.collectionView?(
-//                collectionView,
-//                didSelectItemAt: indexPath
-//            )
-        }
-    }
+    public var selectedIndex = 0
 
     private var continuousFocusedIndex: CGFloat {
 
         guard let collectionView = collectionView,
-            let presentation = self.presentation else { return 0 }
+            let presentation = self.presentation,
+            !cachedItemsAttributes.isEmpty else { return 0 }
+
         let offset = collectionView.bounds.width / 2 + collectionView.contentOffset.x - presentation.itemSize.width / 2
         let index = round(offset / (presentation.itemSize.width + presentation.spacing))
-        if selectedIndex != Int(index) {
-            selectedIndex = Int(index)
+        let count = cachedItemsAttributes.count - 1
+        var safeIndex = Int(index)
+        if safeIndex > count { safeIndex = count }
+        if safeIndex < 0 { safeIndex = 0 }
+        if selectedIndex != safeIndex {
+            selectedIndex = safeIndex
         }
-        return index
+        return CGFloat(safeIndex)
     }
 
     // MARK: - Public Methods
@@ -101,7 +91,6 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
         guard let collectionView = self.collectionView,
             cachedItemsAttributes.isEmpty else { return }
         updateInsets()
-        collectionView.decelerationRate = .fast
         let itemsCount = collectionView.numberOfItems(inSection: 0)
         for item in 0..<itemsCount {
             let indexPath = IndexPath(item: item, section: 0)
@@ -138,6 +127,7 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
         guard let closestAttribute = findClosestAttributes(toXPosition: proposedContentOffset.x + collectionViewMidX) else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
         }
+
         return CGPoint(x: closestAttribute.center.x - collectionViewMidX, y: proposedContentOffset.y)
     }
 

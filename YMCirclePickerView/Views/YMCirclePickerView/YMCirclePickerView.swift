@@ -229,3 +229,17 @@ extension YMCirclePickerView: UICollectionViewDelegate {
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
     }
 }
+
+// MARK: - UIScrollViewDelegate
+
+extension YMCirclePickerView: UIScrollViewDelegate {
+
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        let itemSize: CGFloat = presentation?.layoutPresentation.itemSize.width ?? 0.0
+        let offset = collectionView.bounds.width / 2.0 + collectionView.contentOffset.x - itemSize / 2.0
+        let index = Int(round(offset / (itemSize + (presentation?.layoutPresentation.spacing ?? 0.0))))
+        delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: index)
+        setTitle(at: index)
+    }
+}
