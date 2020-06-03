@@ -17,12 +17,23 @@ public struct YMCirclePickerViewLayoutPresentation {
     var itemSize: CGSize
 
     /// Unselected Item Size
-    var unselectedItemSize: CGSize?
+    var unselectedItemSize: CGSize
 
     /// Spacing between items
     var spacing: CGFloat
 
     var initialIndex: Int?
+
+    public init(
+        itemSize: CGSize,
+        unselectedItemSize: CGSize,
+        spacing: CGFloat
+    ) {
+
+        self.itemSize = itemSize
+        self.unselectedItemSize = unselectedItemSize
+        self.spacing = spacing
+    }
 }
 
 // MARK: - YMCirclePickerViewLayout
@@ -172,11 +183,9 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
         }
         let roundedFocusedIndex = round(continuousFocusedIndex)
         guard attributes.indexPath.item != Int(roundedFocusedIndex) else { return attributes }
-        if let unselectedSize = presentation.unselectedItemSize {
-            let xRatio = unselectedSize.width / presentation.itemSize.width
-            let yRatio = unselectedSize.height / presentation.itemSize.height
-            attributes.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
-        }
+        let xRatio = presentation.unselectedItemSize.width / presentation.itemSize.width
+        let yRatio = presentation.unselectedItemSize.height / presentation.itemSize.height
+        attributes.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
         return attributes
     }
 

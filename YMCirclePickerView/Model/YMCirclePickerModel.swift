@@ -13,7 +13,6 @@ import UIKit
 open class YMCirclePickerModel: NSObject {
 
     public var title: String?
-    public var attributedTitle: NSAttributedString?
     public var image: UIImage?
     public var imageURL: URL?
 

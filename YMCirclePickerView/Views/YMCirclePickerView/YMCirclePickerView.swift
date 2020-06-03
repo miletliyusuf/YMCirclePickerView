@@ -16,7 +16,24 @@ public struct YMCirclePickerViewStylePresentation {
     var selectionLineWidth: CGFloat = 1.0
 
     /// Title Label
+    var titleLabelFont: UIFont
+    var titleLabelTextColor: UIColor
     var titleLabelDistance: CGFloat = 0.0
+
+    public init(
+        selectionColor: UIColor,
+        selectionLineWidth: CGFloat = 1.0,
+        titleLabelFont: UIFont = .systemFont(ofSize: 18.0),
+        titleLabelTextColor: UIColor = .black,
+        titleLabelDistance: CGFloat = 0.0
+    ) {
+
+        self.selectionColor = selectionColor
+        self.selectionLineWidth = selectionLineWidth
+        self.titleLabelFont = titleLabelFont
+        self.titleLabelTextColor = titleLabelTextColor
+        self.titleLabelDistance = titleLabelDistance
+    }
 }
 
 // MARK: - YMCirclePickerView
@@ -25,6 +42,14 @@ public struct YMCirclePickerViewPresentation {
 
     public var layoutPresentation: YMCirclePickerViewLayoutPresentation
     public var stylePresentation: YMCirclePickerViewStylePresentation
+
+    public init(
+        layoutPresentation: YMCirclePickerViewLayoutPresentation,
+        stylePresentation: YMCirclePickerViewStylePresentation
+    ) {
+        self.layoutPresentation = layoutPresentation
+        self.stylePresentation = stylePresentation
+    }
 
     public static var `default` = YMCirclePickerViewPresentation(
         layoutPresentation: YMCirclePickerViewLayoutPresentation(
@@ -152,6 +177,11 @@ public class YMCirclePickerView: UIView {
 
         layoutIfNeeded()
 
+        // Title Label
+
+        titleLabel.font = presentation.stylePresentation.titleLabelFont
+        titleLabel.textColor = presentation.stylePresentation.titleLabelTextColor
+
         selectionView.layer.cornerRadius = (selectionView.frame.size.width / 2.0)
         selectionView.layer.borderWidth = presentation.stylePresentation.selectionLineWidth
         selectionView.layer.borderColor = presentation.stylePresentation.selectionColor.cgColor
@@ -165,8 +195,6 @@ public class YMCirclePickerView: UIView {
         let model = dataSource?.ymCirclePickerView(ymCirclePickerView: self, itemForIndex: index)
         if let title = model?.title {
             titleLabel.text = title
-        } else if let attributedTitle = model?.attributedTitle {
-            titleLabel.attributedText = attributedTitle
         }
     }
 
