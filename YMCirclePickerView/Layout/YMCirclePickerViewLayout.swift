@@ -21,6 +21,8 @@ public struct YMCirclePickerViewLayoutPresentation {
 
     /// Spacing between items
     var spacing: CGFloat
+
+    var initialIndex: Int?
 }
 
 // MARK: - YMCirclePickerViewLayout
@@ -35,6 +37,7 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
 
         self.init()
         self.presentation = presentation
+        self.selectedIndex = presentation.initialIndex ?? 0
     }
 
     override init() {
@@ -59,18 +62,21 @@ public final class YMCirclePickerViewLayout: UICollectionViewFlowLayout {
     // MARK: - Private Properties
     private var cachedItemsAttributes: [IndexPath: UICollectionViewLayoutAttributes] = [:]
 
-    private var selectedIndex = 0 {
+    public var selectedIndex = 0 {
         didSet {
-            guard let collectionView = collectionView else { return }
+            guard let collectionView = collectionView,
+                !cachedItemsAttributes.isEmpty
+            else { return }
             let count = cachedItemsAttributes.count - 1
             var safeIndex = selectedIndex
             if selectedIndex > count { safeIndex = count }
             if selectedIndex < 0 { safeIndex = 0 }
             let indexPath = IndexPath(item: safeIndex, section: 0)
-            collectionView.delegate?.collectionView?(
-                collectionView,
-                didSelectItemAt: indexPath
-            )
+            // TODO: Disable when selected
+//            collectionView.delegate?.collectionView?(
+//                collectionView,
+//                didSelectItemAt: indexPath
+//            )
         }
     }
 

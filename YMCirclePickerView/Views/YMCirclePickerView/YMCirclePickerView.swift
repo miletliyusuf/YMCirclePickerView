@@ -29,7 +29,7 @@ public struct YMCirclePickerViewPresentation {
     public static var `default` = YMCirclePickerViewPresentation(
         layoutPresentation: YMCirclePickerViewLayoutPresentation(
             itemSize: CGSize(width: 60.0, height: 60.0),
-            unselectedItemSize: CGSize(width: 20.0, height: 20.0),
+            unselectedItemSize: CGSize(width: 30.0, height: 30.0),
             spacing: 10.0
         ),
         stylePresentation: YMCirclePickerViewStylePresentation(
@@ -129,6 +129,7 @@ public class YMCirclePickerView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.decelerationRate = .fast
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
     private func updateUI() {
@@ -139,7 +140,6 @@ public class YMCirclePickerView: UIView {
         collectionView.collectionViewLayout = YMCirclePickerViewLayout(
             presentation: presentation.layoutPresentation
         )
-        collectionView.collectionViewLayout.invalidateLayout()
 
         // Selection view
 
@@ -155,6 +155,28 @@ public class YMCirclePickerView: UIView {
         selectionView.layer.cornerRadius = (selectionView.frame.size.width / 2.0)
         selectionView.layer.borderWidth = presentation.stylePresentation.selectionLineWidth
         selectionView.layer.borderColor = presentation.stylePresentation.selectionColor.cgColor
+
+        setTitle(at: self.presentation?.layoutPresentation.initialIndex ?? 0)
+        scrollToItem(at: self.presentation?.layoutPresentation.initialIndex ?? 0)
+    }
+
+    private func setTitle(at index: Int) {
+
+        let model = dataSource?.ymCirclePickerView(ymCirclePickerView: self, itemForIndex: index)
+        if let title = model?.title {
+            titleLabel.text = title
+        } else if let attributedTitle = model?.attributedTitle {
+            titleLabel.attributedText = attributedTitle
+        }
+    }
+
+    private func scrollToItem(at index: Int) {
+
+        let itemWidth = presentation?.layoutPresentation.itemSize.width ?? 0
+        let horizontalInset = (collectionView.bounds.size.width - itemWidth) / 2.0
+        let spacing = presentation?.layoutPresentation.spacing ?? 0.0
+        let x = CGFloat(index) * (itemWidth + spacing) - horizontalInset
+        collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
 }
 
@@ -202,16 +224,8 @@ extension YMCirclePickerView: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let model = dataSource?.ymCirclePickerView(
-            ymCirclePickerView: self,
-            itemForIndex: indexPath.row
-        )
-        if let title = model?.title {
-            titleLabel.text = title
-        } else if let attributedTitle = model?.attributedTitle {
-            titleLabel.attributedText = attributedTitle
-        }
-
+        scrollToItem(at: indexPath.item)
+        setTitle(at: indexPath.item)
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
     }
 }
