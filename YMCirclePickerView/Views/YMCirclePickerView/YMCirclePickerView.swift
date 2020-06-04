@@ -129,6 +129,13 @@ public class YMCirclePickerView: UIView {
         commonInit()
     }
 
+    /// Use to avoid fast double tap
+    private var canSelectItem = true {
+        didSet {
+            collectionView.isUserInteractionEnabled = canSelectItem
+        }
+    }
+
     func commonInit() {
 
         guard let contentView = self.fromNib() else { fatalError("View could not load from nib") }
@@ -247,6 +254,8 @@ extension YMCirclePickerView: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+        guard canSelectItem else { return }
+        canSelectItem = false
         scrollToItem(at: indexPath.item)
         setTitle(at: indexPath.item)
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
@@ -264,5 +273,16 @@ extension YMCirclePickerView: UIScrollViewDelegate {
         let index = Int(round(offset / (itemSize + (presentation?.layoutPresentation.spacing ?? 0.0))))
         delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: index)
         setTitle(at: index)
+        canSelectItem = true
+    }
+
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+
+        canSelectItem = true
+    }
+
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+
+        canSelectItem = true
     }
 }
