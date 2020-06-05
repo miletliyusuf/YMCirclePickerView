@@ -1,0 +1,11 @@
+framework module YMCirclePickerView {
+  umbrella header "YMCirclePickerView.h"
+
+  export *
+  module * { export * }
+}
+
+module YMCirclePickerView.Swift {
+    header "YMCirclePickerView-Swift.h"
+    requires objc
+}

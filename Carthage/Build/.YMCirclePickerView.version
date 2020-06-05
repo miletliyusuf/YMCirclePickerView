@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "68fc725a0ef9d7ad2c84144b001601e64a9a8400",
+  "iOS" : [
+    {
+      "name" : "YMCirclePickerView",
+      "hash" : "160baeb5971eb6ed32d8586153de43056d2a43dbed278fa703e1d21abfbd90b2",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+    }
+  ]
+}
