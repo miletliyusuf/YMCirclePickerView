@@ -20,6 +20,8 @@ Fully customizable horizontal circle picker view.
 
 ## Usage
 
+[Example Project](https://github.com/miletliyusuf/YMFrameworksShowCase)
+
 ### Interface Builder Usage
 
  - Add an empty view in your view and set it's Class to `YMCirclePickerView` with it's module.
