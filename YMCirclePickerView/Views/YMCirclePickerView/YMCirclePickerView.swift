@@ -140,6 +140,9 @@ public class YMCirclePickerView: UIView {
 
     func commonInit() {
 
+//        let bundle = Bundle(for: YMCirclePickerView.self)
+//        let nib = UINib(nibName: "YMCirclePickerView", bundle: bundle)
+//        bundle.loadNibNamed(<#T##name: String##String#>, owner: <#T##Any?#>, options: <#T##[UINib.OptionsKey : Any]?#>)
         guard let contentView = self.fromNib() else { fatalError("View could not load from nib") }
 
         addSubview(contentView)
