@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		88E264D22483E2BF00FAF9ED /* YMCirclePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E264D02483E2BF00FAF9ED /* YMCirclePickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DA2483E3EB00FAF9ED /* YMCirclePickerViewLayout.swift */; };
-		88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */; };
+		88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DD2483F18E00FAF9ED /* YMCirclePickerView.xib */; };
 		88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264DF2483F1DC00FAF9ED /* YMCirclePickerView.swift */; };
 		88E264E32483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E22483F44800FAF9ED /* YMCirclePickerCollectionViewCell.swift */; };
-		88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */; };
+		88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E42483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib */; };
 		88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E264E92483F6C800FAF9ED /* NibLoadable.swift */; };
 		88FC41E72484DC4300E5CE50 /* YMCirclePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FC41E62484DC4300E5CE50 /* YMCirclePickerModel.swift */; };
 /* End PBXBuildFile section */
@@ -191,8 +191,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Resources */,
-				88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +205,8 @@
 				88E264E02483F1DC00FAF9ED /* YMCirclePickerView.swift in Sources */,
 				88E264EA2483F6C800FAF9ED /* NibLoadable.swift in Sources */,
 				88FC41E72484DC4300E5CE50 /* YMCirclePickerModel.swift in Sources */,
+				88E264DE2483F18E00FAF9ED /* YMCirclePickerView.xib in Sources */,
+				88E264E52483F44F00FAF9ED /* YMCirclePickerCollectionViewCell.xib in Sources */,
 				88E264DB2483E3EC00FAF9ED /* YMCirclePickerViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +352,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.miletli.ysm.YMCirclePickerView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -380,7 +380,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.miletli.ysm.YMCirclePickerView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
