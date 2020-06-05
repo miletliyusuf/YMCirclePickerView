@@ -81,7 +81,7 @@ public extension YMCirclePickerViewDelegate {
 
 public protocol YMCirclePickerViewDataSource: AnyObject {
 
-    func ymCirclePickerView<T: YMCirclePickerModel>(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> T
+    func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> YMCirclePickerModel?
     func ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: YMCirclePickerView) -> Int
 }
 
@@ -135,6 +135,8 @@ public class YMCirclePickerView: UIView {
             collectionView.isUserInteractionEnabled = canSelectItem
         }
     }
+
+    private var count: Int = 0
 
     func commonInit() {
 
@@ -204,8 +206,11 @@ public class YMCirclePickerView: UIView {
 
     private func setTitle(at index: Int) {
 
-        let model = dataSource?.ymCirclePickerView(ymCirclePickerView: self, itemForIndex: index)
-        if let title = model?.title {
+        guard let model: YMCirclePickerModel = dataSource?.ymCirclePickerView(
+            ymCirclePickerView: self,
+            itemForIndex: index
+            ) else { return }
+        if let title = model.title {
             titleLabel.text = title
         }
     }
@@ -218,6 +223,14 @@ public class YMCirclePickerView: UIView {
         let x = CGFloat(index) * (itemWidth + spacing) - horizontalInset
         collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
+
+    private func getSafeIndex(for index: Int) -> Int {
+
+        var safeIndex = index
+        if safeIndex >= count { safeIndex = (count - 1) }
+        if safeIndex < 0 { safeIndex = 0 }
+        return safeIndex
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -226,7 +239,8 @@ extension YMCirclePickerView: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return dataSource?.ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: self) ?? 0
+        count = dataSource?.ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: self) ?? 0
+        return count
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -235,7 +249,7 @@ extension YMCirclePickerView: UICollectionViewDataSource {
             withReuseIdentifier: YMCirclePickerCollectionViewCell.reuseIdentifier,
             for: indexPath
             ) as? YMCirclePickerCollectionViewCell,
-            let model = dataSource?.ymCirclePickerView(
+            let model: YMCirclePickerModel = dataSource?.ymCirclePickerView(
                 ymCirclePickerView: self,
                 itemForIndex: indexPath.row
             ) else { return UICollectionViewCell() }
@@ -256,9 +270,15 @@ extension YMCirclePickerView: UICollectionViewDelegate {
 
         guard canSelectItem else { return }
         canSelectItem = false
-        scrollToItem(at: indexPath.item)
-        setTitle(at: indexPath.item)
-        delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: indexPath.item)
+
+        let index = getSafeIndex(for: indexPath.item)
+
+        scrollToItem(at: index)
+        setTitle(at: index)
+        delegate?.ymCirclePickerView(
+            ymCirclePickerView: self,
+            didSelectItemAt: index
+        )
     }
 }
 
@@ -271,8 +291,9 @@ extension YMCirclePickerView: UIScrollViewDelegate {
         let itemSize: CGFloat = presentation?.layoutPresentation.itemSize.width ?? 0.0
         let offset = collectionView.bounds.width / 2.0 + collectionView.contentOffset.x - itemSize / 2.0
         let index = Int(round(offset / (itemSize + (presentation?.layoutPresentation.spacing ?? 0.0))))
-        delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: index)
-        setTitle(at: index)
+        let safeIndex = getSafeIndex(for: index)
+        delegate?.ymCirclePickerView(ymCirclePickerView: self, didSelectItemAt: safeIndex)
+        setTitle(at: safeIndex)
         canSelectItem = true
     }
 
