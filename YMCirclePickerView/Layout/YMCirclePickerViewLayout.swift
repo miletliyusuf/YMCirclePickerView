@@ -27,12 +27,14 @@ public struct YMCirclePickerViewLayoutPresentation {
     public init(
         itemSize: CGSize,
         unselectedItemSize: CGSize,
-        spacing: CGFloat
+        spacing: CGFloat,
+        initialIndex: Int? = nil
     ) {
 
         self.itemSize = itemSize
         self.unselectedItemSize = unselectedItemSize
         self.spacing = spacing
+        self.initialIndex = initialIndex
     }
 }
 
