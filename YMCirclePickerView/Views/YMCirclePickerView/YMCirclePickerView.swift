@@ -82,7 +82,19 @@ public extension YMCirclePickerViewDelegate {
 public protocol YMCirclePickerViewDataSource: AnyObject {
 
     func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> YMCirclePickerModel?
+    func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> UIView?
     func ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: YMCirclePickerView) -> Int
+}
+
+public extension YMCirclePickerViewDataSource {
+
+    func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> YMCirclePickerModel? {
+        return nil
+    }
+
+    func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> UIView? {
+        return nil
+    }
 }
 
 // MARK: - YMCirclePickerView
@@ -140,9 +152,6 @@ public class YMCirclePickerView: UIView {
 
     func commonInit() {
 
-//        let bundle = Bundle(for: YMCirclePickerView.self)
-//        let nib = UINib(nibName: "YMCirclePickerView", bundle: bundle)
-//        bundle.loadNibNamed(<#T##name: String##String#>, owner: <#T##Any?#>, options: <#T##[UINib.OptionsKey : Any]?#>)
         guard let contentView = self.fromNib() else { fatalError("View could not load from nib") }
 
         addSubview(contentView)
@@ -251,14 +260,15 @@ extension YMCirclePickerView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: YMCirclePickerCollectionViewCell.reuseIdentifier,
             for: indexPath
-            ) as? YMCirclePickerCollectionViewCell,
-            let model: YMCirclePickerModel = dataSource?.ymCirclePickerView(
+        ) as? YMCirclePickerCollectionViewCell else { return UICollectionViewCell() }
+
+        if let model: YMCirclePickerModel = dataSource?.ymCirclePickerView(
                 ymCirclePickerView: self,
                 itemForIndex: indexPath.row
-            ) else { return UICollectionViewCell() }
-
-        if let image = model.image {
-            cell.presentation = YMCirclePickerCollectionViewCellPresentation(image: image)
+        ) {
+            cell.presentation = YMCirclePickerCollectionViewCellPresentation(image: model.image)
+        } else if let view: UIView = dataSource?.ymCirclePickerView(ymCirclePickerView: self, itemForIndex: indexPath.row) {
+            cell.presentation = YMCirclePickerCollectionViewCellPresentation(subView: view)
         }
 
         return cell
@@ -272,7 +282,10 @@ extension YMCirclePickerView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard canSelectItem else { return }
-        canSelectItem = false
+
+        if indexPath.row != getSafeIndex(for: indexPath.item) {
+            canSelectItem = false
+        }
 
         let index = getSafeIndex(for: indexPath.item)
 

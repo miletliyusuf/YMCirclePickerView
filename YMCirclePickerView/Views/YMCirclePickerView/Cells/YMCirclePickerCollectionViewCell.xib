@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,19 +17,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="128" height="146"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I79-SD-pws">
+                        <rect key="frame" x="0.0" y="0.0" width="128" height="146"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ugO-8e-6FQ">
                         <rect key="frame" x="0.0" y="0.0" width="128" height="146"/>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ugO-8e-6FQ" secondAttribute="trailing" id="0Pf-w7-vkX"/>
+                    <constraint firstItem="I79-SD-pws" firstAttribute="leading" secondItem="6xM-Qx-KBF" secondAttribute="leading" id="8xJ-Xy-5lS"/>
                     <constraint firstAttribute="bottom" secondItem="ugO-8e-6FQ" secondAttribute="bottom" id="C4g-a7-PBP"/>
+                    <constraint firstAttribute="trailing" secondItem="I79-SD-pws" secondAttribute="trailing" id="I79-fh-nim"/>
+                    <constraint firstItem="I79-SD-pws" firstAttribute="top" secondItem="6xM-Qx-KBF" secondAttribute="top" id="Lyh-iu-Z2a"/>
                     <constraint firstItem="ugO-8e-6FQ" firstAttribute="leading" secondItem="6xM-Qx-KBF" secondAttribute="leading" id="QeB-Zh-hMU"/>
+                    <constraint firstAttribute="bottom" secondItem="I79-SD-pws" secondAttribute="bottom" id="aTf-SY-b0J"/>
                     <constraint firstItem="ugO-8e-6FQ" firstAttribute="top" secondItem="6xM-Qx-KBF" secondAttribute="top" id="ya7-fK-etw"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="128" height="146"/>
             <connections>
+                <outlet property="containerView" destination="I79-SD-pws" id="2TC-G4-U2B"/>
                 <outlet property="imageView" destination="ugO-8e-6FQ" id="3RF-YD-0lx"/>
             </connections>
             <point key="canvasLocation" x="149.27536231884059" y="34.821428571428569"/>
