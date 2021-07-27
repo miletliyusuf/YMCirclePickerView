@@ -2,7 +2,7 @@
 
 Fully customizable horizontal circle picker view.
 
-![YMCirclePickerView](https://s7.gifyu.com/images/YMCirclePickerView.gif)
+![YMCirclePickerView](https://media.giphy.com/media/kMqA1hSOqnqnuSbFtq/giphy.gif)
 
 [![Swift Version][swift-image]][swift-url]
 [![Build Status][travis-image]][travis-url]
@@ -26,7 +26,7 @@ Fully customizable horizontal circle picker view.
 
  - Add an empty view in your view and set it's Class to `YMCirclePickerView` with it's module.
 
-![YMCirclePickerView-Interfacebuilder](https://s7.gifyu.com/images/YMCirclePickerView-Interfacebuilder.gif)
+![YMCirclePickerView-Interfacebuilder](https://media.giphy.com/media/JlR0b2Tm3QJvSZ7CWN/giphy.gif)
 
  - Add datasource and delegate(if necessary) then customize *layout* and *style* presentations in code.
  
