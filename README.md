@@ -110,9 +110,22 @@ func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex ind
 }
 ```
 
+or you can return your custom UIView as well.
+
+```swift
+
+func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> UIView? {
+
+    let view = UIView()
+    view.backgroundColor = .red
+    return view
+}
+```
+
 - DataSource Methods
 ```swift
 func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> YMCirclePickerModel?
+func ymCirclePickerView(ymCirclePickerView: YMCirclePickerView, itemForIndex index: Int) -> UIView?
 func ymCirclePickerViewNumberOfItemsInPicker(ymCirclePickerView: YMCirclePickerView) -> Int
 ```
 - Delegate Methods
