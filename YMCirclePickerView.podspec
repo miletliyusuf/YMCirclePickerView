@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "YMCirclePickerView"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "HTTP Networking library written in Swift."
 
   spec.description  = <<-DESC
