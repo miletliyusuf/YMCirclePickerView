@@ -227,7 +227,15 @@ public class YMCirclePickerView: UIView {
         }
     }
 
-    private func scrollToItem(at index: Int) {
+    private func getSafeIndex(for index: Int) -> Int {
+
+        var safeIndex = index
+        if safeIndex >= count { safeIndex = (count - 1) }
+        if safeIndex < 0 { safeIndex = 0 }
+        return safeIndex
+    }
+
+    public func scrollToItem(at index: Int) {
 
         let itemWidth = presentation?.layoutPresentation.itemSize.width ?? 0
         let horizontalInset = (collectionView.bounds.size.width - itemWidth) / 2.0
@@ -236,12 +244,9 @@ public class YMCirclePickerView: UIView {
         collectionView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
 
-    private func getSafeIndex(for index: Int) -> Int {
+    public func reloadData() {
 
-        var safeIndex = index
-        if safeIndex >= count { safeIndex = (count - 1) }
-        if safeIndex < 0 { safeIndex = 0 }
-        return safeIndex
+        collectionView.reloadData()
     }
 }
 
